@@ -1,0 +1,10 @@
+ SELECT
+ @i:=0, -- счетчик 1
+ @j:=0, -- счетчик 2
+ @p:=1, -- номер страницы
+ @n:=10, -- записей на страницу
+ @un:='Геральт',  -- username
+ @k:=1264; -- id записи
+ SELECT @i:=@i+1,@j:=if(id=@k,@i,@j) FROM user WHERE username=@un ORDER BY id;
+ -- расчет номера записи и страницы
+ SELECT @j AS number, @p:=if(@j<=@n,1,ceiling(@j/@n)-1) AS page
